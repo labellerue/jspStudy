@@ -1,12 +1,15 @@
-package kr.or.ddit.user.service;
+package kr.or.ddit.user;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
+import java.util.Map;
 
+import kr.or.ddit.user.model.PageVo;
 import kr.or.ddit.user.model.UserVo;
-import kr.or.ddit.util.model.PageVo;
+import kr.or.ddit.user.service.UserService;
+import kr.or.ddit.user.service.UserServiceInf;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -96,18 +99,19 @@ public class UserServiceTest {
 	@Test
 	public void selectUserPageListTest(){
 		/***Given***/
-
-		/***When***/
 		PageVo pageVo = new PageVo();
 		pageVo.setPage(1);
 		pageVo.setPageSize(10);
+
+		/***When***/
+		Map<String, Object> pageMap = userService.selectUserPageList(pageVo);
+		List<UserVo> pageList = (List<UserVo>)pageMap.get("pageList");
 		
-		List<UserVo> pageList = userService.selectUserPageList(pageVo);
-		System.out.println(pageList);
-		System.out.println(pageList.size());
+		int pageCnt = (Integer)pageMap.get("pageCnt");
 		
 		/***Then***/
 		assertEquals(10, pageList.size());
+		assertEquals(11, pageCnt);
 	}
 
 

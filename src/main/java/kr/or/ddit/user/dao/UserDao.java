@@ -3,8 +3,8 @@ package kr.or.ddit.user.dao;
 import java.util.List;
 
 import kr.or.ddit.db.SqlFactoryBuilder;
+import kr.or.ddit.user.model.PageVo;
 import kr.or.ddit.user.model.UserVo;
-import kr.or.ddit.util.model.PageVo;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -28,7 +28,15 @@ public class UserDao implements UserDaoInf{
 		//selectOne : 데이터가 한 건일 때
 		//selectList : 여러건의 데이터를 조회할 때
 		//메소드 인자: 문자열 = 네임스페이스(모듈명).쿼리아이디
-		return session.selectList("jspuser.selectUserAll");
+		List<UserVo> userList = session.selectList("jspuser.selectUserAll");
+		
+		//자동 커밋이 안되기 때문에 명시
+		session.rollback();
+		session.commit();
+		//닫아주세요.
+		session.close();
+		
+		return userList;
 	}
 	
 	// 회원정보 조회 
@@ -37,7 +45,10 @@ public class UserDao implements UserDaoInf{
 		factory = SqlFactoryBuilder.getSqlSessionFactory();
 		SqlSession session = factory.openSession();
 		
-		return session.selectOne("jspuser.selectUser", userId);
+		UserVo userVo = session.selectOne("jspuser.selectUser", userId);
+		session.close();
+		
+		return userVo;
 	}
 	
 	@Override
@@ -45,15 +56,40 @@ public class UserDao implements UserDaoInf{
 		factory = SqlFactoryBuilder.getSqlSessionFactory();
 		SqlSession session = factory.openSession();
 		
-		return session.selectOne("jspuser.selectUserByVo", userVo);
+		UserVo userVoResult = session.selectOne("jspuser.selectUserByVo", userVo);
+		session.close();
+		
+		return userVoResult;
 	}
+		
 
 	@Override
 	public List<UserVo> selectUserPageList(PageVo pageVo) {
 		factory = SqlFactoryBuilder.getSqlSessionFactory();
 		SqlSession session = factory.openSession();
 		
-		return session.selectList("jspuser.selectUserPageList", pageVo);
+		List<UserVo> userList = session.selectList("jspuser.selectUserPageList", pageVo);
+		session.close();
+		
+		return userList;
+	}
+
+	/**
+	* Method : getUserCnt
+	* 작성자 : sohyoung
+	* 변경이력 :
+	* @return
+	* Method 설명 : 사용자 전체 건수 조회
+	*/
+	@Override
+	public int getUserCnt() {
+		factory = SqlFactoryBuilder.getSqlSessionFactory();
+		SqlSession session = factory.openSession();
+		
+		int totalUserCnt = session.selectOne("jspuser.getUserCnt");
+		session.close();
+		
+		return totalUserCnt;
 	}
 	
 	

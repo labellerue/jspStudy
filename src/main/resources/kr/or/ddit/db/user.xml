@@ -16,19 +16,28 @@
   
    <!-- 회원정보 조회2 -->
   <select id="selectUserByVo" parameterType="userVo" resultType="userVo">
-  	Select * From jspuser Where userId=#{userId} and name=#{name} and pass=#{pass} and
+  	Select * From jspuser Where userId=#{userId} 
+  	<!-- and name=#{name} and pass=#{pass} and
   	addr1=#{addr1} and addr2=#{addr2} and zip=#{zip} and birth=#{birth} and 
-  	email=#{email} and tel=#{tel}
+  	email=#{email} and tel=#{tel} -->
   </select>
   
   <!-- 페이징 처리 -->
   <select id="selectUserPageList" parameterType="pageVo" resultType="userVo">
   	Select *
-	From (select rownum rnum, jspuser.* 
-		  from   jspuser 
-		  order by userId)
-	where rnum between #{page}*#{pageSize}-(#{pageSize}-1)
-    and #{page}*#{pageSize}
+	From ( 
+    	Select rownum rnum, a.* 
+    	From (
+	        Select jspuser.*
+	        From   jspuser
+	        Order by userId) a)
+	Where rnum Between #{page}*#{pageSize}-(#{pageSize}-1)
+    		   And #{page}*#{pageSize}
+  </select>
+  
+  <!-- 전체 회원 수 -->
+  <select id="getUserCnt" resultType="int">
+  	Select count(*) From jspuser
   </select>
   
 </mapper>

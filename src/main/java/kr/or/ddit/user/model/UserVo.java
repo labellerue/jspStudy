@@ -14,6 +14,7 @@ public class UserVo {
 	private String tel;
 	private String profile;
 	private String alias;
+	private int rnum;
 	
 	
 	public UserVo(){
@@ -107,14 +108,22 @@ public class UserVo {
 	public void setAlias(String alias) {
 		this.alias = alias;
 	}
+	
+	public int getRnum() {
+		return rnum;
+	}
 
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 
 	@Override
 	public String toString() {
-		return "UserVo [userid=" + userId + ", name=" + name + ", pass=" + pass
+		return "UserVo [userId=" + userId + ", name=" + name + ", pass=" + pass
 				+ ", addr1=" + addr1 + ", addr2=" + addr2 + ", zip=" + zip
 				+ ", birth=" + birth + ", email=" + email + ", tel=" + tel
-				+ ", profile=" + profile + "]";
+				+ ", profile=" + profile + ", alias=" + alias + ", rnum="
+				+ rnum + "]";
 	}
 
 

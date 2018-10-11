@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	List<UserVo> userList = (List<UserVo>) request.getAttribute("userList");
+	List<UserVo> userList = (List<UserVo>)request.getAttribute("pageList");
 %>
 
 <!DOCTYPE html>
@@ -17,12 +17,45 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>Jsp</title>
+<title>회원 정보 테이블</title>
 
 <%--javascript and css stylesheet --%>
 <%@include file="/common/basicLib.jsp"%>
+<style type="text/css">
+	.userClick {
+		cursor : pointer;
+	}
+	
+	
+</style>
+<script type="text/javascript">
+
+	function al(user){
+		document.location="/userDetail?userId="+user;
+	}
+	
+	$(document).ready(function(){
+		console.log("document.ready");
+		
+		
+		
+		//tr에 select (class="userClick")
+		$(".userClick").on("click", function(){
+			console.log("userClick");
+			var userId = $(this).children()[1].innerText;
+			
+			$("#userId").val(userId);
+			$("#frm").submit();
+		});
+		
+	});
+</script>
 
 </head>
+<!-- hidden으로 form을 넣는 것은 실무에서도 사용합니다! -->
+<form action="/userDetail" method="get" id="frm">
+	<input type="hidden" id="userId" name="userId"/>
+</form>
 <body>
 
 	<%@ include file="/common/header.jsp"%>
@@ -37,7 +70,7 @@
 					<div class="col-sm-8 blog-main">
 						<h2 class="sub-header">사용자</h2>
 						<div class="table-responsive">
-							<table class="table table-striped">
+							<table class="table table-striped table-hover">
 								<tr>
 									<th>no.</th>
 									<th>아이디</th>
@@ -48,8 +81,11 @@
 									if (userList != null) {
 										for (int i = 0; i < userList.size(); i++) {
 								%>
-								<tr>
-									<td><%=i + 1%></td>
+								
+								<!-- <tr onclick="javascript:alert('<%=userList.get(i).getUserId()%>')"> -->
+								<!--<tr onclick="al('<%=userList.get(i).getUserId()%>')">-->
+								<tr class="userClick">
+									<td><%=userList.get(i).getRnum()%></td>
 									<td><%=userList.get(i).getUserId()%></td>
 									<td><%=userList.get(i).getName()%></td>
 									<td><%=userList.get(i).getBirth().toString().substring(4, 10)
@@ -57,7 +93,7 @@
 											+ userList.get(i).getBirth().toString().substring(24)%></td>
 								</tr>
 								<%
-									}
+										}
 									}
 								%>
 							</table>
@@ -65,11 +101,16 @@
 						<a class="btn btn-default pull-right">사용자 등록</a>
 						<div class="text-center">
 							<ul class="pagination">
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
+								<li><a href="/userPageList?page=1&pageSize=10" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
+								<%
+									int pageCnt = (Integer) request.getAttribute("pageCnt");
+									for (int p = 1; p <= pageCnt; p++) {
+								%>
+								<li><a href="/userPageList?page=<%=p%>&pageSize=10"><%=p%></a></li>
+								<%
+									}
+								%>
+								<li><a href="/userPageList?page=<%=pageCnt%>&pageSize=10" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
 							</ul>
 						</div>
 					</div>
