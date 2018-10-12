@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.or.ddit.user.model.PageVo;
 import kr.or.ddit.user.model.UserVo;
 import kr.or.ddit.user.service.UserService;
 import kr.or.ddit.user.service.UserServiceInf;
+import kr.or.ddit.util.model.PageVo;
 
 @WebServlet(urlPatterns={"/userAllList","/userPageList", "/userDetail"})
 public class UserServlet extends HttpServlet {

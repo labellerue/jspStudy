@@ -6,8 +6,8 @@ import java.util.Map;
 
 import kr.or.ddit.user.dao.UserDao;
 import kr.or.ddit.user.dao.UserDaoInf;
-import kr.or.ddit.user.model.PageVo;
 import kr.or.ddit.user.model.UserVo;
+import kr.or.ddit.util.model.PageVo;
 
 public class UserService implements UserServiceInf {
 
@@ -50,6 +50,23 @@ public class UserService implements UserServiceInf {
 		
 		return resultMap;
 	}
+
+	@Override
+	public int insertUser(UserVo userVo) {
+		return userDao.insertUser(userVo);
+	}
+
+	@Override
+	public int deleteUser(String userId) {
+		return userDao.deleteUser(userId);
+	}
+
+	@Override
+	public int updateUser(UserVo userVo) {
+		return userDao.updateUser(userVo);
+	}
+	
+
 	
 	
 

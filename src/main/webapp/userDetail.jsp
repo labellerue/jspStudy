@@ -25,8 +25,8 @@
 
 <%--javascript and css stylesheet --%>
 <%@include file="/common/basicLib.jsp"%>
-
 </head>
+
 <body>
 	<!-- top bar -->
 	<%@ include file="/common/header.jsp"%>
@@ -39,72 +39,72 @@
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="row">
 					<!-- form -->
-					<form class="form-horizontal" role="form">
+					<form class="form-horizontal" role="form" method="get" action="/userUpdate" >
 						<div class="form-group">
 							<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 							<div class="col-sm-10">
-								<img src="<%=userDetail.getProfile() %>" width="216"/>
+								<img src="<%=userDetail.getProfile() %>" width="216" />
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="userNm" class="col-sm-2 control-label">사용자 아이디</label>
 							<div class="col-sm-10">
-								<label class="control-label"><%=userDetail.getUserId() %></label>
+								<label class="control-label" ><%=userDetail.getUserId() %></label>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="userNm" class="col-sm-2 control-label">이름</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="userNm" name="userNm" placeholder="이름" value=<%=userDetail.getName() %>>
+								<label class="control-label"><%=userDetail.getName() %></label>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label for="userNm" class="col-sm-2 control-label">주소</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="userAddr1" name="userAddr1" placeholder="주소" value="<%=userDetail.getAddr1() %>">
+								<label class="control-label"><%=userDetail.getAddr1() %></label>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label for="userNm" class="col-sm-2 control-label">상세주소</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="userAddr2" name="userAddr2" placeholder="상세주소" value="<%=userDetail.getAddr2() %>">
+								<label class="control-label"><%=userDetail.getAddr2() %></label>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label for="pass" class="col-sm-2 control-label">우편번호</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="userZip" name="userZip" placeholder="우편번호" value="<%=userDetail.getZip() %>">
+								<label class="control-label"><%=userDetail.getZip() %></label>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="pass" class="col-sm-2 control-label">생년월일</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="userBirth" name="userBirth" placeholder="생년월일" value="<%=userDetail.getBirth() %>">
+								<label class="control-label"><%=userDetail.getBirth() %></label>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label for="pass" class="col-sm-2 control-label">이메일</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="이메일" value="<%=userDetail.getEmail() %>">
+								<label class="control-label"><%=userDetail.getEmail() %></label>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<label for="pass" class="col-sm-2 control-label">연락처</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="userTel" name="userTel" placeholder="연락처" value="<%=userDetail.getTel() %>">
+								<label class="control-label"><%=userDetail.getTel() %></label>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" class="btn btn-default">사용자 정보 수정</button>
+								<a class="btn btn-default pull-right" href="/userUpdate?userId=<%=userDetail.getUserId() %>" >정보 수정</a>
 							</div>
 						</div>
 					</form>

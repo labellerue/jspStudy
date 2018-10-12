@@ -98,7 +98,7 @@
 								%>
 							</table>
 						</div>
-						<a class="btn btn-default pull-right">사용자 등록</a>
+						<a class="btn btn-default pull-right" href="/userForm" >사용자 등록</a><!-- get으로 넘어갑니다. -->
 						<div class="text-center">
 							<ul class="pagination">
 								<li><a href="/userPageList?page=1&pageSize=10" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
