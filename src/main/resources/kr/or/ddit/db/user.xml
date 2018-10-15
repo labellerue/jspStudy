@@ -55,7 +55,8 @@
   <update id="updateUser" parameterType="userVo">
   	Update jspuser 
   	Set name=#{name}, pass=#{pass}, addr1=#{addr1}, addr2=#{addr2}, zip=#{zip}, 
-  		birth=#{birth}, email=#{email}, tel=#{tel}, profile=#{profile}
+  		birth=#{birth}, email=#{email}, tel=#{tel}
+		<if test="profile != null">, profile=#{profile}</if>
   	Where userId = #{userId}
   </update>
   

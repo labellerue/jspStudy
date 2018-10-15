@@ -1,5 +1,6 @@
 package kr.or.ddit.user.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class UserVo {
@@ -67,6 +68,11 @@ public class UserVo {
 
 	public void setZip(String zip) {
 		this.zip = zip;
+	}
+
+	public String getFormatBirth() {
+		String formatBirth = new SimpleDateFormat("yyyy-MM-dd").format(birth);
+		return formatBirth;
 	}
 
 	public Date getBirth() {

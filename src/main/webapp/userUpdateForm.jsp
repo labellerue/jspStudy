@@ -88,7 +88,7 @@
 						<div class="form-group">
 							<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 							<div class="col-sm-10">
-								<!-- <img src="<%user.getProfile(); %>" width="216" /> -->
+								<img src="<%=user.getProfile() %>" width="216" />
 								<input type="file" name="profile" />
 							</div>
 						</div>
@@ -167,8 +167,8 @@
 						</div>
 						
 						<div class="form-group">
-							<div class="col-sm-10">
-								<input type="submit" value="수정완료">
+							<div class="col-sm-offset-2 col-sm-10">
+								<input type="submit" class="btn btn-default" value="수정완료">
 							</div>
 						</div>
 					</form>

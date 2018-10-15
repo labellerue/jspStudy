@@ -104,7 +104,7 @@
 						
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								<a class="btn btn-default pull-right" href="/userUpdate?userId=<%=userDetail.getUserId() %>" >정보 수정</a>
+								<a class="btn btn-default" href="/userUpdate?userId=<%=userDetail.getUserId() %>" >정보 수정</a>
 							</div>
 						</div>
 					</form>

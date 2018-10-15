@@ -61,7 +61,8 @@ public class UserUpdateFormServlet extends HttpServlet {
 
 		// 파일 저장 및 경로 가져오기
 		String profile = getProfile(request);
-
+		
+		// 수정하고자 하는 정보 가져오기
 		UserVo userVo = new UserVo();
 		userVo.setUserId(request.getParameter("userId"));
 		userVo.setName(request.getParameter("name"));
@@ -88,8 +89,7 @@ public class UserUpdateFormServlet extends HttpServlet {
 		System.out.println("업데이트 성공여부" + updateCnt);
 
 		// 수정 되었나 detailForm에서 확인
-		RequestDispatcher rd = request.getRequestDispatcher("/userDetail");
-		rd.forward(request, response);
+		response.sendRedirect("/userDetail?userId="+request.getParameter("userId"));
 
 	}
 
@@ -113,15 +113,25 @@ public class UserUpdateFormServlet extends HttpServlet {
 		String contentDisposition = profilePart.getHeader("Content-disposition");
 		// file 경로 가져오는 메서드를 StringUtil 클래스에 넣었어요.
 		String fileName = StringUtil.getFileNameFromHeader(contentDisposition);
+		
+		// 파일 수정을 하지 않은 경우
+		String dbPath = null;
+		if(fileName.equals("")){
+			System.out.println("profile 업로드 안함");
+			dbPath = null;
+		// 파일 수정을 한 경우
+		}else{
+			System.out.println("profile 업로드");
+			dbPath = "/profile/" + fileName;
 
-		// url 정보를 실제 파일 경로로 변경(배포되는 경로입니다.)
-		String path = getServletContext().getRealPath("/profile");
-		String savePath = path + File.separator + fileName;
-		// 파일 쓰기
-		profilePart.write(savePath);
-		profilePart.delete();
-
-		return "/profile/" + fileName;
+			// url 정보를 실제 파일 경로로 변경(배포되는 경로입니다.)
+			String path = getServletContext().getRealPath("/profile");
+			String savePath = path + File.separator + fileName;
+			// 파일 쓰기
+			profilePart.write(savePath);
+			profilePart.delete();
+		}
+		return dbPath;
 	}
 
 }
