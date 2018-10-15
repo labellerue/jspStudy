@@ -42,8 +42,10 @@ public class LoginServlet extends HttpServlet{
 					cookie.getName().equals("userId") ){
 					cookie.setMaxAge(0);
 					cookie.setMaxAge(0);
+					// 0으로 설정한 후 보내주기
+					resp.addCookie(cookie);
 				}
-				System.out.println("cookie는 : "+ cookie.getName()+"값은 "+cookie.getValue());
+				System.out.println("cookie는 : "+ cookie.getName()+" 값은 "+cookie.getValue());
 			}
 			
 		//아이디 기억 사용할 경우
