@@ -4,7 +4,7 @@ public class StringUtil {
 	
 	/**
 	* Method : getFileNameFromHeader
-	* 작성자 : pc02
+	* 작성자 : sohyoung
 	* 변경이력 :
 	* @param contentDisposition
 	* @return
@@ -23,5 +23,64 @@ public class StringUtil {
 		}
 		return fileName;
 	}
+	
+	/**
+	* Method : getCookie
+	* 작성자 : sohyoung
+	* 변경이력 :
+	* @param cookieString
+	* @param key
+	* @return
+	* Method 설명 : 쿠키 정보 값 추출
+	*/
+	public static String getCookie(String cookieString, String key){
+		String value = "";
+		String[] split = cookieString.split("; ");
+		for(String str : split){
+			System.out.println(str);
+			if(str.startsWith(key+"=")){
+				value = str.substring((key+"=").length());
+			}
+		}
+		return value;
+	}
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

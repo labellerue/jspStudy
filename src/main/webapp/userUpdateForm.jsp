@@ -146,7 +146,7 @@
 							<label for="birth" class="col-sm-2 control-label">생년월일</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="birth" name="birth" placeholder="생년월일"
-								value="<%=new SimpleDateFormat("yyyy-MM-dd").format(user.getBirth()) %>">
+								value="<%=user.getFormatBirth() %>">
 							</div>
 						</div>
 						

@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +31,29 @@ public class LoginServlet extends HttpServlet{
 		//1.
 		String userId = req.getParameter("userId");
 		String password = req.getParameter("password");
+		String rememberMe = req.getParameter("remember-me");
+		System.out.println("rememberMe  " + rememberMe);
+		
+		//아이디 기억 안할 경우
+		if(rememberMe == null){
+			Cookie[] cookies = req.getCookies();
+			for(Cookie cookie : cookies){
+				if(cookie.getName().equals("remember") ||
+					cookie.getName().equals("userId") ){
+					cookie.setMaxAge(0);
+					cookie.setMaxAge(0);
+				}
+				System.out.println("cookie는 : "+ cookie.getName()+"값은 "+cookie.getValue());
+			}
+			
+		//아이디 기억 사용할 경우
+		}else{
+			//response 객체에 쿠키를 저장
+			Cookie cookie = new Cookie("remember", "Y");
+			Cookie userIdCookie = new Cookie("userId", userId);
+			resp.addCookie(cookie);
+			resp.addCookie(userIdCookie);
+		}
 		
 		//2. 사용자가 전송한 userId로 사용자 정보 조회
 		UserServiceInf userService = new UserService();

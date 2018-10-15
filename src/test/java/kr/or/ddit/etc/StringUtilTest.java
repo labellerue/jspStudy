@@ -1,6 +1,7 @@
 package kr.or.ddit.etc;
 
 import static org.junit.Assert.*;
+import kr.or.ddit.util.StringUtil;
 
 import org.hamcrest.core.SubstringMatcher;
 import org.junit.Before;
@@ -43,5 +44,48 @@ public class StringUtilTest {
 		
 
 	}
+	
+	//쿠키 문자역 파싱 테스트
+	@Test
+	public void getCookieTest(){
+		/***Given***/
+		String cookieString = "remember=Y; userId=brown; etc=test";
+
+		/***When***/
+		String cookieValue = StringUtil.getCookie(cookieString, "remember");
+		String cookieValue2 = StringUtil.getCookie(cookieString, "userId");
+		
+		/***Then***/
+		assertEquals("Y", cookieValue);
+		assertEquals("brown", cookieValue2);
+	}
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
