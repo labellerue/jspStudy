@@ -66,11 +66,18 @@
 		<scope>provided</scope>
 	</dependency>
 		
-	<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+	<!-- dbcp2 : https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
 	<dependency>
 		<groupId>org.apache.commons</groupId>
 		<artifactId>commons-dbcp2</artifactId>
 		<version>2.5.0</version>
+	</dependency>
+		
+	<!-- jstl :  https://mvnrepository.com/artifact/javax.servlet/jstl -->
+	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>1.2</version>
 	</dependency>
 		
 	  
