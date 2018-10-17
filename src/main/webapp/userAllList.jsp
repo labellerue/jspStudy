@@ -2,9 +2,8 @@
 <%@page import="kr.or.ddit.user.model.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	List<UserVo> userList = (List<UserVo>) request.getAttribute("userList");
-%>
+	 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +23,7 @@
 
 </head>
 <body>
-
+	<%--header --%>
 	<%@ include file="/common/header.jsp"%>
 
 	<div class="container-fluid">
@@ -44,23 +43,17 @@
 									<th>이름</th>
 									<th>생일</th>
 								</tr>
-								<%
-									if (userList != null) {
-										for (int i = 0; i < userList.size(); i++) {
-								%>
-								<tr>
-									<td><%=i + 1%></td>
-									<td><%=userList.get(i).getUserId()%></td>
-									<td><%=userList.get(i).getName()%></td>
-									<td><%=userList.get(i).getBirth().toString().substring(4, 10)
-											+ " "
-											+ userList.get(i).getBirth().toString().substring(24)%></td>
-								</tr>
-								<%
-									}
-									}
-								%>
+								
+								<c:forEach items="${userList }" var="vo" varStatus="status"> 
+									<tr>
+										<td>${status.index + 1 }</td>
+										<td>${vo.userId }</td>
+										<td>${vo.name }</td>
+										<td><fmt:formatDate value="${vo.birth }" pattern="yyyy-MM-dd"/></td>
+									</tr>
+								</c:forEach>
 							</table>
+							
 						</div>
 						<a class="btn btn-default pull-right">사용자 등록</a>
 						<div class="text-center">

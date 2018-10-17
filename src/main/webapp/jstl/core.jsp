@@ -23,6 +23,13 @@
 	pageContext : <%=pageContext.getAttribute("attribute") %> <br/>
 	request : <%=request.getAttribute("attribute") %> <br/>
 	
+	<h3>set Test</h3>
+	<c:set var="this_is_key" value="value" />
+	el : ${this_is_key }	<br/>
+	is it page? ${pageScope.attribute }	<br/>
+	
+	
+	
 	<h2>core remove</h2>
 	<%--pageContext.removeAttribute("attribute"); --%>
 	<c:remove var="attribute"/>
@@ -37,7 +44,7 @@
 		if 실행
 	</c:if>
 	
-	<h2>core choose : 실직적인 if 구문</h2>
+	<h2>core choose : 실질적인 if 구문</h2>
 	<c:choose>
 		<c:when test="${code == '00' }"> 공공</c:when>
 		<c:when test="${code == '01' }"> 공일</c:when>

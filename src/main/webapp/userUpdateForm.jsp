@@ -3,14 +3,8 @@
 <%@page import="kr.or.ddit.user.model.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	UserVo user = (UserVo) request.getAttribute("userDetail");
-	System.out.println("Update Form의 userVo : " + user);
-	//프로필 이미지를 설정하지 않은 경우
-	if (user.getProfile() == null) {
-		user.setProfile("/profile/noimage.png");
-	}
-%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +82,10 @@
 						<div class="form-group">
 							<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 							<div class="col-sm-10">
-								<img src="<%=user.getProfile() %>" width="216" />
+								<c:choose>
+									<c:when test="${userDetail.profile == null }"><img src="/profile/noimage.png" width="216" /></c:when>
+									<c:otherwise><img src="${userDetail.profile }" width="216" /></c:otherwise>
+								</c:choose>
 								<input type="file" name="profile" />
 							</div>
 						</div>
@@ -96,7 +93,7 @@
 							<label for="userId" class="col-sm-2 control-label">사용자 아이디</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="userId" name="userId" readonly placeholder="사용자 아이디" 
-								value="<%=user.getUserId() %>" >
+								value="${userDetail.userId }" >
 							</div>
 						</div>
 						
@@ -104,7 +101,7 @@
 							<label for="pass" class="col-sm-2 control-label">비밀번호</label>
 							<div class="col-sm-10">
 								<input type="password" class="form-control" id="pass" name="pass" placeholder="사용자 아이디"
-								 value="<%=user.getPass() %>">
+								 value="${userDetail.pass }">
 							</div>
 						</div>
 
@@ -112,7 +109,7 @@
 							<label for="userNm" class="col-sm-2 control-label">이름</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="name" name="name" placeholder="이름"
-								value="<%=user.getName() %>">
+								value="${userDetail.name }">
 							</div>
 						</div>
 						
@@ -120,7 +117,7 @@
 							<label for="addr1" class="col-sm-2 control-label">주소</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="addr1" name="addr1" readonly placeholder="주소"
-								value="<%=user.getAddr1() %>">
+								value="${userDetail.addr1 }">
 								<!-- 주소 검색 버튼 -->
 								<button type="button" id="addrSearchBtn" class="btn btn-default">주소검색</button>
 							</div>
@@ -130,7 +127,7 @@
 							<label for="addr2" class="col-sm-2 control-label">상세주소</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="addr2" name="addr2" placeholder="상세주소"
-								value="<%=user.getAddr2() %>">
+								value="${userDetail.addr2 }">
 							</div>
 						</div>
 						
@@ -138,7 +135,7 @@
 							<label for="zip" class="col-sm-2 control-label">우편번호</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="zip" name="zip" placeholder="우편번호"
-								value="<%=user.getZip() %>">
+								value="${userDetail.zip }">
 							</div>
 						</div>
 
@@ -146,7 +143,7 @@
 							<label for="birth" class="col-sm-2 control-label">생년월일</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="birth" name="birth" placeholder="생년월일"
-								value="<%=user.getFormatBirth() %>">
+								value="<fmt:formatDate value="${userDetail.birth }" pattern="yyyy-MM-dd" />">
 							</div>
 						</div>
 						
@@ -154,7 +151,7 @@
 							<label for="email" class="col-sm-2 control-label">이메일</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="email" name="email" placeholder="이메일"
-								value="<%=user.getEmail() %>">
+								value="${userDetail.email }">
 							</div>
 						</div>
 						
@@ -162,7 +159,7 @@
 							<label for="tel" class="col-sm-2 control-label">연락처</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" id="tel" name="tel" placeholder="연락처"
-								value="<%=user.getTel() %>">
+								value="${userDetail.tel }">
 							</div>
 						</div>
 						

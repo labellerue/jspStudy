@@ -32,10 +32,12 @@
  application : <%=application.getAttribute("attribute") %>  <br/>
  
  <h2>el</h2>
- <!-- 범위가 큰 것부터 가져옴.. 그러니 key 값을 같은 이름으로 주지 마세요 -->
+ <!-- 범위가 작은
+  것부터 가져옴.. 그러니 key 값을 같은 이름으로 주지 마세요 -->
  el attribute : ${attribute} <br/>
  <!-- 지정해주면 그에 따른 값이 나오지만 이름은 다르게 주는게 바람직합니다. -->
  el attribute : ${applicationScope.attribute} <br/>
+ el request attribute : ${requestScope.attribute} <br/>
  
 
 </body>

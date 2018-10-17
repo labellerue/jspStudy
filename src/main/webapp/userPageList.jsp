@@ -2,10 +2,8 @@
 <%@page import="kr.or.ddit.user.model.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	List<UserVo> userList = (List<UserVo>)request.getAttribute("pageList");
-%>
-
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,8 +23,6 @@
 	.userClick {
 		cursor : pointer;
 	}
-	
-	
 </style>
 <script type="text/javascript">
 
@@ -77,40 +73,33 @@
 									<th>이름</th>
 									<th>생일</th>
 								</tr>
-								<%
-									if (userList != null) {
-										for (int i = 0; i < userList.size(); i++) {
-								%>
-								
-								<!-- <tr onclick="javascript:alert('<%=userList.get(i).getUserId()%>')"> -->
-								<!--<tr onclick="al('<%=userList.get(i).getUserId()%>')">-->
-								<tr class="userClick">
-									<td><%=userList.get(i).getRnum()%></td>
-									<td><%=userList.get(i).getUserId()%></td>
-									<td><%=userList.get(i).getName()%></td>
-									<td><%=userList.get(i).getBirth().toString().substring(4, 10)
-											+ " "
-											+ userList.get(i).getBirth().toString().substring(24)%></td>
-								</tr>
-								<%
-										}
-									}
-								%>
+
+								<c:forEach items="${pageList }" var="vo" >
+									<tr class="userClick">
+										<td>${vo.rnum }</td>
+										<td>${vo.userId }</td>
+										<td>${vo.name }</td>
+										<td><fmt:formatDate value="${vo.birth }" pattern="yyyy-MM-dd" /></td>
+									</tr>
+								</c:forEach>
 							</table>
+
 						</div>
-						<a class="btn btn-default pull-right" href="/userForm" >사용자 등록</a><!-- get으로 넘어갑니다. -->
+						<a class="btn btn-default pull-right" href="/userForm">사용자 등록</a>
+						<!-- get으로 넘어갑니다. -->
 						<div class="text-center">
 							<ul class="pagination">
-								<li><a href="/userPageList?page=1&pageSize=10" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
-								<%
-									int pageCnt = (Integer) request.getAttribute("pageCnt");
-									for (int p = 1; p <= pageCnt; p++) {
-								%>
-								<li><a href="/userPageList?page=<%=p%>&pageSize=10"><%=p%></a></li>
-								<%
-									}
-								%>
-								<li><a href="/userPageList?page=<%=pageCnt%>&pageSize=10" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+								<li><a href="/userPageList?page=1&pageSize=10"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
+									
+								<c:forEach begin="1" end="${pageCnt}" var="pageNum">
+									<li><a href="/userPageList?page=${pageNum }&pageSize=10">${pageNum }</a></li>
+								</c:forEach>
+
+								<li>
+								<a href="/userPageList?page=${pageCnt }&pageSize=10" aria-label="Next"> 
+								<span aria-hidden="true">&raquo;</span></a>
+								</li>
 							</ul>
 						</div>
 					</div>

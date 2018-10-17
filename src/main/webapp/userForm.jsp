@@ -29,7 +29,7 @@
 	$(document).ready(function(){
 		
 	//개발 과정에서 사용할 기본 값 설정
-	$("#userId").val();
+	/* $("#userId").val();
 	$("#pass").val("pass1234");
 	$("#name").val("testUser");
 	$("#addr1").val("대전 중구 중앙로 76 ");
@@ -37,7 +37,7 @@
 	$("#zip").val("34940");
 	$("#birth").val("2018-10-12");
 	$("#email").val("newUser@gmail.com");
-	$("#tel").val("0422228202");
+	$("#tel").val("0422228202"); */
 	
 	
 	//주소검색 버튼의 click event가 발생했을 시 실행
@@ -101,7 +101,7 @@
 						<div class="form-group">
 							<label for="pass" class="col-sm-2 control-label">비밀번호</label>
 							<div class="col-sm-10">
-								<input type="password" class="form-control" id="pass" name="pass" placeholder="사용자 아이디" >
+								<input type="password" class="form-control" id="pass" name="pass" placeholder="비밀번호" >
 							</div>
 						</div>
 
