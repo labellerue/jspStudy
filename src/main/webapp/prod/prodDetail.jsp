@@ -43,6 +43,7 @@
 					<!-- form -->
 					<form class="form-horizontal" role="form" method="get" action="/userUpdate" >
 						<div class="form-group">
+						
 							<label for="userNm" class="col-sm-2 control-label">제품아이디</label>
 							<div class="col-sm-10">
 								<label class="control-label" >${prodDetail.prod_id }</label>
