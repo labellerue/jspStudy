@@ -131,6 +131,10 @@ public class UserVo {
 				+ ", profile=" + profile + ", alias=" + alias + ", rnum="
 				+ rnum + "]";
 	}
+	
+	public boolean authPass(String encryptPass){
+		return getPass().equals(encryptPass);
+	}
 
 
 	

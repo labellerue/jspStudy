@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.or.ddit.encrypt.sha.KISA_SHA256;
 import kr.or.ddit.user.model.UserVo;
 import kr.or.ddit.user.service.UserService;
 import kr.or.ddit.user.service.UserServiceInf;
@@ -62,7 +63,10 @@ public class LoginServlet extends HttpServlet{
 		UserVo userVo = userService.selectUser(userId);
 		
 		//3. 일치할 경우
-		if(userVo != null && password.equals(userVo.getPass())){
+//		if(userVo != null && password.equals(userVo.getPass())){
+		/* 패스워드 암호화 */
+		String encryptPass = KISA_SHA256.encrypt(password);
+		if(userVo != null && userVo.authPass(encryptPass)){
 			//redirect
 			//resp.sendRedirect("main.jsp?userId=" + userId + "&password=" + password);
 			
@@ -79,10 +83,6 @@ public class LoginServlet extends HttpServlet{
 		}else{
 			resp.sendRedirect("login/login.jsp");
 		}
-		
-		
-		
-		
 		
 	}
 	
