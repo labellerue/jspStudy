@@ -1,7 +1,7 @@
 package kr.or.ddit.locales;
 
 
-import java.util.TimeZone;
+//import java.util.TimeZone;
 
 import org.junit.Test;
 
@@ -13,10 +13,10 @@ public class TimezoneTest {
 		
 		/*** When ***/
 		//시간 timezone 정보 제공되는 나라 
-		String[] timezones = TimeZone.getAvailableIDs();
-		for(String str : timezones){
-			System.out.println(str);
-		}
+//		String[] timezones = TimeZone.getAvailableIDs();
+//		for(String str : timezones){
+//			System.out.println(str);
+//		}
 		/*** Then ***/
 
 	}
