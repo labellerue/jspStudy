@@ -3,7 +3,6 @@ package kr.or.ddit.etc;
 import static org.junit.Assert.*;
 import kr.or.ddit.util.StringUtil;
 
-import org.hamcrest.core.SubstringMatcher;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

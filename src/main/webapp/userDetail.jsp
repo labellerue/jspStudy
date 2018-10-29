@@ -46,10 +46,14 @@
 							<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 							<div class="col-sm-10">
 							<c:choose>
-								<c:when test="${userDetail.profile == null }"><img src="/profile/noimage.png" width="216" /></c:when>
-								<c:otherwise><img src="${userDetail.profile }" width="216" /></c:otherwise>
+								<c:when test="${userDetail.profile == null }">
+									<img src="/profile/noimage.png" width="216" />
+								</c:when>
+								<c:otherwise>
+									<!-- <img src="${userDetail.profile }" width="216" /> -->
+									<img src="/fileDownload?userId=${userDetail.userId }" width="216" />
+								</c:otherwise>
 							</c:choose>
-								
 							</div>
 						</div>
 						<div class="form-group">
@@ -113,6 +117,9 @@
 								<a class="btn btn-default" href="/userUpdate?userId=${userDetail.userId }" >정보 수정</a>
 							</div>
 						</div>
+					</form>
+					<form action="/fileDownloadName" method="get">
+					<button type="submit">다운로드 받기</button>
 					</form>
 					
 				</div>

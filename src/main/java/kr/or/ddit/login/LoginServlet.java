@@ -17,34 +17,41 @@ import kr.or.ddit.user.service.UserService;
 import kr.or.ddit.user.service.UserServiceInf;
 
 public class LoginServlet extends HttpServlet{
-	
+	private static final long serialVersionUID = 1L;
 	
 	//service  --> request.getMethod() : "POST", "GET" --> doGet, doPost
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		String newParameter = request.getParameter("newParameter");
+		System.out.println("newParameter : " + newParameter);
+		
+//		Map<String, String[]> reqMap = request.getParameterMap();
+//		reqMap.put("newParam", new String[] {"newValue"});
+		
 		//1. 사용자 아이디, 비밀번호를 request객체에서 받아온다.
 		//2. db에서 조회해온 아이디, 비밀번호를 체크한다.
 		//3-1. 일치할 경우 main.jsp로 이동
 		//3-2. 불일치할 경우 login.jsp로 이동
 		
 		//1.
-		String userId = req.getParameter("userId");
-		String password = req.getParameter("password");
-		String rememberMe = req.getParameter("remember-me");
+		String userId = request.getParameter("userId");
+		String password = request.getParameter("password");
+		String rememberMe = request.getParameter("remember-me");
 		System.out.println("rememberMe  " + rememberMe);
 		
 		//아이디 기억 안할 경우
 		if(rememberMe == null){
-			Cookie[] cookies = req.getCookies();
+			Cookie[] cookies = request.getCookies();
 			for(Cookie cookie : cookies){
 				if(cookie.getName().equals("remember") ||
 					cookie.getName().equals("userId") ){
 					cookie.setMaxAge(0);
 					cookie.setMaxAge(0);
 					// 0으로 설정한 후 보내주기
-					resp.addCookie(cookie);
+					response.addCookie(cookie);
 				}
 				System.out.println("cookie는 : "+ cookie.getName()+" 값은 "+cookie.getValue());
 			}
@@ -54,8 +61,8 @@ public class LoginServlet extends HttpServlet{
 			//response 객체에 쿠키를 저장
 			Cookie cookie = new Cookie("remember", "Y");
 			Cookie userIdCookie = new Cookie("userId", userId);
-			resp.addCookie(cookie);
-			resp.addCookie(userIdCookie);
+			response.addCookie(cookie);
+			response.addCookie(userIdCookie);
 		}
 		
 		//2. 사용자가 전송한 userId로 사용자 정보 조회
@@ -71,17 +78,17 @@ public class LoginServlet extends HttpServlet{
 			//resp.sendRedirect("main.jsp?userId=" + userId + "&password=" + password);
 			
 			//3-1. main.jsp
-			HttpSession session = req.getSession();
+			HttpSession session = request.getSession();
 			session.setAttribute("userVo", userVo);
 			//위와 같은 내용 req.getSession().setAttribute("userVo", userVo);
 			
 			//dispatch
-			RequestDispatcher rd = req.getRequestDispatcher("main.jsp");
-			rd.forward(req, resp); //저장하기
+			RequestDispatcher rd = request.getRequestDispatcher("main.jsp");
+			rd.forward(request, response); //저장하기
 			
 		//3-2. login.jsp로 이동
 		}else{
-			resp.sendRedirect("login/login.jsp");
+			response.sendRedirect("login/login.jsp");
 		}
 		
 	}

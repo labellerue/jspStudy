@@ -1,11 +1,8 @@
 package kr.or.ddit.locales;
 
-import static org.junit.Assert.*;
 
 import java.util.TimeZone;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TimezoneTest {
