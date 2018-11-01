@@ -1,0 +1,29 @@
+$response.setContentType("text/html; charset=UTF-8;")
+<html>
+<head>
+<title>velocity.vm</title>
+</head>
+<body>
+
+	application.applicationAttr : 	$!application.applicationAttr <br/>
+	session.sessionAttr : 			$!session.sessionAttr					<br/>
+	request.requestAttr : 			$!request.requestAttr					<br/>
+	
+	<h2>velocity loop</h2>
+	<!-- 반복문 -->
+	#foreach($ranger in $!rangers)
+		$ranger <br/>
+	#end
+
+
+	<h2>한글</h2>
+	<h2>velocity foreach + if</h2>
+	<!-- if문 -->
+	#foreach($ranger in $!rangers)
+		#if($ranger == 'brown')
+			$ranger <br/>
+		#end
+	#end
+	
+</body>
+</html>
